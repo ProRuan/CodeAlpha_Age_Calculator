@@ -4,13 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Age Calculator</title>
+
+    <!-- folder structure (html, css, js)!!! -->
+    <!-- final check! -->
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="/assets/fonts/inter.css">
+
+    <link rel="stylesheet" href="/assets/styles/tags.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+
+    <script src="/assets/libs/rxjs.umd.min.js"></script>
+
+    <script src="/assets/scripts/utilise.js"></script>
+    <script src="/assets/scripts/init.js"></script>
+    <script src="/assets/scripts/main.js"></script>
 </head>
 
-<body>
-    <h1>Age Calculator</h1>
+<body onload="onInit()">
+    <header>
+        <span>CodeAlpha</span>
+        <span>Task 1.1</span>
+    </header>
+
+    <main>
+        <form name="form" class="form" onsubmit="onSubmit(); return false">
+            <h1 class="headline">Age Calculator</h1>
+
+            <div class="form-content">
+                <div class="input-button-cont">
+                    <div class="input-cont">
+                        <input id="input" name="input" for="form" [value]="value" class="input" type="text"
+                            placeholder="DD/MM/YYYY" required minlength="10" maxlength="10" oninput="onInput()">
+                        <input id="date-picker" name="date-picker" for="form" class="date-picker" type="date"
+                            onchange="onDateChange()">
+                    </div>
+
+                    <button id="submit-btn" name="submit-btn" for="form" class="submit-btn" type="submit">
+                        Calculate age
+                    </button>
+                </div>
+
+                <div class="age-affirmation-cont">
+                    <div id="age-cont" class="age-cont">
+                        <span id="age" name="age" for="input" class="age">0</span>
+                    </div>
+
+                    <div id="affirmation-cont" class="affirmation-cont">
+                        <p class="affirmation">
+                            Enter your birthdate and<br>
+                            calculate your age.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-link-group">
+            <a href="imprint.html" target="_blank" class="footer-link">Imprint</a>
+            <a href="privacy-policy.html" target="_blank" class="footer-link">Privacy Policy</a>
+        </div>
+    </footer>
 </body>
 
 </html>
