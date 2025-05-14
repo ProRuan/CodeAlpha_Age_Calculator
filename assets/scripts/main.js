@@ -98,6 +98,7 @@ function calculateAge(birthdate) {
     let birthTime = getTimeByDate(birthdate);
     let birthdateParts = getDateParts(birthdate);
     renderUserAge(birthTime, birthdateParts);
+    setElementValue('input', '');
 }
 
 
