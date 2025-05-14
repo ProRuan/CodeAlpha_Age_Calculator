@@ -80,7 +80,7 @@ function isDateValid(date) {
 
 /**
  * Sets age calculator styles.
- * @param {boolean} invalid - A boolean value. 
+ * @param {boolean} invalid - The value to set. 
  */
 function setAgeCalculatorStyles(invalid = false) {
     let borderColor = invalid ? '#b22222' : '';
@@ -211,16 +211,29 @@ function getAffirmation(userAge) {
 
 
 /**
- * Updates a date picker value on input.
+ * Updates input related values on input.
  */
 function onInput() {
     let value = getElementValue('input');
     if (isDateComplete(value)) {
+        setSubmitButtonDisabled(false);
         let date = getCalendarCompatibleDate(value);
         if (isDateValid(date)) {
             datePickerValueSubject.next(date);
         }
+    } else {
+        setSubmitButtonDisabled(true);
     }
+}
+
+
+/**
+ * Sets the disabled state of a submit button.
+ * @param {boolean} value - The value to set.
+ */
+function setSubmitButtonDisabled(value) {
+    let submitBtn = getElement('submit-btn');
+    submitBtn.disabled = value;
 }
 
 

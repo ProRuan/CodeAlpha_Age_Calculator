@@ -86,9 +86,14 @@
     transition: all 100ms ease-in-out;
 }
 
-.submit-btn:hover:not(:active) {
+.submit-btn:hover:not(:active, :disabled) {
     color: var(--white);
     background-color: var(--blue);
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 .age-affirmation-cont {
