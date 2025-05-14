@@ -38,10 +38,6 @@ main {
     font-style: normal;
 }
 
-p {
-    text-align: justify;
-}
-
 .important-link {
     text-decoration: none;
     color: darkblue;
@@ -84,4 +80,12 @@ h4 {
 
 .footer-link:hover {
     text-decoration: underline;
+}
+
+
+@media (max-width: 468px) {
+    .copyright {
+        flex-direction: column;
+        gap: 4px;
+    }
 }

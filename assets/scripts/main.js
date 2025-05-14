@@ -99,6 +99,7 @@ function calculateAge(birthdate) {
     let birthdateParts = getDateParts(birthdate);
     renderUserAge(birthTime, birthdateParts);
     setElementValue('input', '');
+    setSubmitButtonDisabled(true);
 }
 
 
@@ -211,6 +212,28 @@ function getAffirmation(userAge) {
 
 
 /**
+ * Sets the disabled state of a submit button.
+ * @param {boolean} value - The value to set.
+ */
+function setSubmitButtonDisabled(value) {
+    let submitBtn = getElement('submit-btn');
+    submitBtn.disabled = value;
+}
+
+
+/**
+ * Sets an error affirmation.
+ */
+function setErrorAffirmation() {
+    let affCont = getElement('affirmation-cont');
+    affCont.innerHTML = `
+        <p class="affirmation invalid-date">${invalidDateAffirmation}</p>
+    `;
+}
+
+
+
+/**
  * Updates input related values on input.
  */
 function onInput() {
@@ -224,16 +247,6 @@ function onInput() {
     } else {
         setSubmitButtonDisabled(true);
     }
-}
-
-
-/**
- * Sets the disabled state of a submit button.
- * @param {boolean} value - The value to set.
- */
-function setSubmitButtonDisabled(value) {
-    let submitBtn = getElement('submit-btn');
-    submitBtn.disabled = value;
 }
 
 
@@ -254,15 +267,4 @@ function onDateChange() {
  */
 function getInputCompatibleValue(date) {
     return date.split('-').reverse().join('/');
-}
-
-
-/**
- * Sets an error affirmation.
- */
-function setErrorAffirmation() {
-    let affCont = getElement('affirmation-cont');
-    affCont.innerHTML = `
-        <p class="affirmation invalid-date">${invalidDateAffirmation}</p>
-    `;
 }

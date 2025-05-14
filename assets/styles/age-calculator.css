@@ -162,3 +162,28 @@
 .footer-link:hover {
     text-decoration: underline;
 }
+
+
+@media (max-width: 1280px) {
+    .submit-btn:hover:not(:active, :disabled) {
+        color: var(--blue);
+        background-color: var(--white);
+    }
+
+    .submit-btn:active:not(:disabled) {
+        color: var(--white);
+        background-color: var(--blue);
+    }
+}
+
+
+@media (max-width: 468px) {
+    .form {
+        width: calc(100% - 32px);
+    }
+
+    .headline {
+        font-size: 32px;
+        line-height: 38.4px;
+    }
+}
