@@ -1,5 +1,5 @@
 /**
- * Gets an HTML element.
+ * Gets a HTML element.
  * @param {string} id - The HTML element id. 
  * @returns The HTML element.
  */
@@ -9,7 +9,7 @@ function getElement(id) {
 
 
 /**
- * Gets an HTML element value.
+ * Gets a HTML element value.
  * @param {string} id - The HTML element id. 
  * @returns The HTML element value.
  */
@@ -19,14 +19,14 @@ function getElementValue(id) {
 
 
 /**
- * Sets an HTML element style.
+ * Sets a HTML element style.
  * @param {string} id - The HTML element id.
- * @param {string} property - The style property key.
+ * @param {string} key - The style property key.
  * @param {string} value - The style property value to set.
  */
-function setElementStyle(id, property, value) {
+function setElementStyle(id, key, value) {
     let element = getElement(id);
-    element.style[property] = value;
+    element.style[key] = value;
 }
 
 

@@ -1,4 +1,5 @@
 const invalidDateAffirmation = 'Nice try, time traveler. Pick a real date!';
+
 const affirmations = [
     { minAge: 0, text: 'Curiosity is your superpower — keep exploring!' },
     { minAge: 13, text: 'Your thoughts matter. Your voice matters. You matter.' },
@@ -10,10 +11,10 @@ const affirmations = [
     { minAge: 70, text: 'Your journey inspires — you carry a lifetime of grace.' },
     { minAge: 100, text: 'A legend walks among us. What stories you must carry!' }
 ];
+
 const futureAgeAffirmation = `
     You may not be here yet, but greatness is already written in your stars.
 `;
-
 
 let userAge = '';
 
@@ -23,9 +24,19 @@ let userAge = '';
  */
 function onSubmit() {
     let value = getElementValue('input');
-    if (value.length > 9) {
-        submitBirthdate(value)
+    if (isDateComplete(value)) {
+        submitBirthdate(value);
     }
+}
+
+
+/**
+ * Checks an input value to be ready for submission.
+ * @param {string} value - The input value. 
+ * @returns A boolean value.
+ */
+function isDateComplete(value) {
+    return value.length === 10;
 }
 
 
@@ -41,27 +52,19 @@ function submitBirthdate(value) {
     } else {
         setAgeCalculatorStyles(true);
         updateAgeCont('?');
-        updateAffirmationContInvalid();
+        setErrorAffirmation();
     }
 }
 
 
-// rename!!!
-function updateAffirmationContInvalid() {
-    let elem = getElement('affirmation-cont');
-    elem.innerHTML = `
-        <p class="affirmation invalid-date">${invalidDateAffirmation}</p>
-    `;
-}
-
 
 /**
- * Gets a formatted date.
+ * Gets a calendar compatible date.
  * @param {string} value - The input value.
- * @returns The formatted date.
+ * @returns The calendar compatible date.
  */
 function getCalendarCompatibleDate(value) {
-    return value.split('/').reverse().join('-')
+    return value.split('/').reverse().join('-');
 }
 
 
@@ -81,15 +84,15 @@ function isDateValid(date) {
  */
 function setAgeCalculatorStyles(invalid = false) {
     let borderColor = invalid ? '#b22222' : '';
-    let bgc = invalid ? '#b22222' : '#1f618d'
+    let bgc = invalid ? '#b22222' : '#1f618d';
     setElementStyle('input', 'borderColor', borderColor);
     setElementStyle('age-cont', 'backgroundColor', bgc);
 }
 
 
 /**
- * Calculates a user age by birth date.
- * @param {Date} birthdate - The birth date.
+ * Calculates a user age by birthdate.
+ * @param {Date} birthdate - The birthdate.
  */
 function calculateAge(birthdate) {
     let birthTime = getTimeByDate(birthdate);
@@ -99,20 +102,9 @@ function calculateAge(birthdate) {
 
 
 /**
- * Checks a user to be born.
- * @param {number} birthTime - The user birth time.
- * @param {number} currentDate - The current time.
- * @returns A boolean value.
- */
-function isUserBorn(birthTime, currentTime) {
-    return birthTime <= currentTime;
-}
-
-
-/**
  * Renders a user age.
  * @param {number} birthTime - The birth time.
- * @param {object} birthdateParts - The birth date parts.
+ * @param {object} birthdateParts - The birthdate parts.
  */
 function renderUserAge(birthTime, birthdateParts) {
     if (isUserBorn(birthTime, currentTime)) {
@@ -127,8 +119,19 @@ function renderUserAge(birthTime, birthdateParts) {
 
 
 /**
+ * Checks a user to be born.
+ * @param {number} birthTime - The user birth time.
+ * @param {number} currentTime - The current time.
+ * @returns A boolean value.
+ */
+function isUserBorn(birthTime, currentTime) {
+    return birthTime <= currentTime;
+}
+
+
+/**
  * Gets a user age.
- * @param {object} birthdateParts - The birthdate parts object.
+ * @param {object} birthdateParts - The object containing the birthdate parts.
  * @returns The user age.
  */
 function getUserAge(birthdateParts) {
@@ -138,16 +141,16 @@ function getUserAge(birthdateParts) {
 
 
 /**
- * Gets a delta date parts object.
- * @param {object} birthdateParts - The birthdate parts object.
- * @returns The delta date parts object.
+ * Gets the object containing delta date parts.
+ * @param {object} birthdateParts - The object containing the birthday parts.
+ * @returns The object cotaining the delta date parts.
  */
 function getDeltaDateParts(birthdateParts) {
     return {
         years: diff(currentDateParts.year, birthdateParts.year),
         months: diff(currentDateParts.month, birthdateParts.month),
         days: diff(currentDateParts.day, birthdateParts.day)
-    }
+    };
 }
 
 
@@ -164,8 +167,8 @@ function diff(minuend, subtrahend) {
 
 /**
  * Checks a user birthday remaining to be done.
- * @param {number} deltaMonths - The months after your birth month.
- * @param {number} deltaDays - The days after your birth day.
+ * @param {number} deltaMonths - The distance to the user birth month in month.
+ * @param {number} deltaDays - The distance to the user birth day in days.
  * @returns A boolean value.
  */
 function isBirthdayRemaining(deltaMonths, deltaDays) {
@@ -187,6 +190,7 @@ function updateAgeCont(value) {
 
 /**
  * Updates the inner HTML of an affirmation container.
+ * @param {string} text - The text to set.
  */
 function updateAffirmationCont(text) {
     let affText = text ?? getAffirmation(userAge);
@@ -209,10 +213,12 @@ function getAffirmation(userAge) {
  * Updates a date picker value on input.
  */
 function onInput() {
-    let input = getElement('input');
-    if (input.value.length > 9) {
-        let value = getCalendarCompatibleDate(input.value);
-        datePickerValueSubject.next(value);
+    let value = getElementValue('input');
+    if (isDateComplete(value)) {
+        let date = getCalendarCompatibleDate(value);
+        if (isDateValid(date)) {
+            datePickerValueSubject.next(date);
+        }
     }
 }
 
@@ -222,16 +228,27 @@ function onInput() {
  */
 function onDateChange() {
     let datePicker = getElement('date-picker');
-    let value = getInputCompatibleDate(datePicker.value);
+    let value = getInputCompatibleValue(datePicker.date);
     inputValueSubject.next(value);
 }
 
 
 /**
- * Gets an input compatible date.
+ * Gets an input compatible value.
  * @param {string} date - The date. 
- * @returns The input compatible date.
+ * @returns The input compatible value.
  */
-function getInputCompatibleDate(date) {
+function getInputCompatibleValue(date) {
     return date.split('-').reverse().join('/');
+}
+
+
+/**
+ * Sets an error affirmation.
+ */
+function setErrorAffirmation() {
+    let affCont = getElement('affirmation-cont');
+    affCont.innerHTML = `
+        <p class="affirmation invalid-date">${invalidDateAffirmation}</p>
+    `;
 }

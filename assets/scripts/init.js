@@ -29,7 +29,7 @@ function onInit() {
 function subscribeTo(elementValue$, elementId) {
     elementValue$.subscribe({
         next: (value) => setElementValue(elementId, value)
-    })
+    });
 }
 
 /**
@@ -51,9 +51,9 @@ function getCurrentDate() {
 }
 
 /**
- * Gets an object with the date parts.
+ * Gets an object containing the date parts.
  * @param {string} date - The date.
- * @returns The object with the date parts.
+ * @returns The object containing the date parts.
  */
 function getDateParts(date) {
     let [year, month, day] = date.split('-');
