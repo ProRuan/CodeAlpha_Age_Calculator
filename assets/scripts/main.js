@@ -74,7 +74,7 @@ function getCalendarCompatibleDate(value) {
  * @returns A boolean value.
  */
 function isDateValid(date) {
-    return new Date(date).toDateString() !== 'Invalid Date';
+    return !isDateInvalid(date) && isLeapVerifiedDate(date);
 }
 
 

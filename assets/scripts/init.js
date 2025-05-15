@@ -36,19 +36,11 @@ function subscribeTo(elementValue$, elementId) {
  * Sets a current date data set.
  */
 function setCurrentDateDataSet() {
-    currentDate = getCurrentDate();
+    currentDate = getDateFromISOString();
     currentDateParts = getDateParts(currentDate);
     currentTime = getTimeByDate(currentDate);
 }
 
-
-/**
- * Gets a current date.
- * @returns The current date.
- */
-function getCurrentDate() {
-    return new Date().toISOString().split('T')[0];
-}
 
 /**
  * Gets an object containing the date parts.
