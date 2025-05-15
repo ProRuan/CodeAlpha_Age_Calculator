@@ -71,6 +71,16 @@
     right: 17px;
 }
 
+.calendar {
+    width: 24px;
+    height: 24px;
+    background-color: var(--white);
+    position: absolute;
+    top: 13px;
+    right: 17px;
+    pointer-events: none;
+}
+
 .submit-btn {
     box-sizing: border-box;
     border: 1px solid var(--blue);

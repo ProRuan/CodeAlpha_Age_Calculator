@@ -1,6 +1,6 @@
 /**
  * Gets a date.
- * @param {any} value - The date value. 
+ * @param {number | string | Date} value - The date value. 
  * @returns The date.
  */
 function getDate(value = Date.now()) {
@@ -10,7 +10,7 @@ function getDate(value = Date.now()) {
 
 /**
  * Gets a date from the ISO string.
- * @param {any} value - The date value. 
+ * @param {number | string | Date} value - The date value. 
  * @returns The date from the ISO string.
  */
 function getDateFromISOString(value) {
@@ -20,7 +20,7 @@ function getDateFromISOString(value) {
 
 /**
  * Gets a date string.
- * @param {any} value - The date value.
+ * @param {number | string | Date} value - The date value.
  * @returns The date string.
  */
 function getDateString(value) {
@@ -50,7 +50,7 @@ function getElementValue(id) {
 
 /**
  * Checks a date for invalidity.
- * @param {any} value - The date value.
+ * @param {number | string | Date} value - The date value.
  * @returns A boolean value.
  */
 function isDateInvalid(value) {
@@ -60,7 +60,7 @@ function isDateInvalid(value) {
 
 /**
  * Checks a (leap) date for being existent.
- * @param {any} value - The date value.
+ * @param {number | string | Date} value - The date value.
  * @returns A boolean value.
  */
 function isLeapVerifiedDate(value) {

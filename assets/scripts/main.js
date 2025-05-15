@@ -180,7 +180,7 @@ function isBirthdayRemaining(deltaMonths, deltaDays) {
 
 /**
  * Updates the inner HTML of an age container.
- * @param {any} value - The value to set.
+ * @param {number | string} value - The value to set.
  */
 function updateAgeCont(value) {
     let ageCont = getElement('age-cont');
