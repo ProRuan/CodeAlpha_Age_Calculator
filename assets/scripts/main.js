@@ -255,7 +255,7 @@ function onInput() {
  */
 function onDateChange() {
     let datePicker = getElement('date-picker');
-    let value = getInputCompatibleValue(datePicker.date);
+    let value = getInputCompatibleValue(datePicker.value);
     inputValueSubject.next(value);
 }
 
